@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://xlk254cuwb0v"]
+
+[ext_resource type="PackedScene" uid="uid://pbmyh1qru7p" path="res://characters/happy_boo/happy_boo.tscn" id="1_73x7j"]
+[ext_resource type="Script" path="res://player.gd" id="1_mpw4x"]
+[ext_resource type="PackedScene" uid="uid://0kofpnaknb2t" path="res://gun.tscn" id="3_ji8hp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mn3pn"]
+radius = 38.4708
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hkl1v"]
+radius = 40.6079
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x121q"]
+bg_color = Color(0.152941, 0.168627, 0.188235, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d0kov"]
+bg_color = Color(0.623529, 0.866667, 0.317647, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_mpw4x")
+
+[node name="HappyBoo" parent="." instance=ExtResource("1_73x7j")]
+position = Vector2(-1, -2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_mn3pn")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Gun" parent="." instance=ExtResource("3_ji8hp")]
+position = Vector2(2, -41)
+
+[node name="hurtbox" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+shape = SubResource("CircleShape2D_hkl1v")
+debug_color = Color(0.683528, 0.396147, 0.793515, 0.42)
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = -129.0
+offset_top = -135.0
+offset_right = 128.0
+offset_bottom = -108.0
+theme_override_styles/background = SubResource("StyleBoxFlat_x121q")
+theme_override_styles/fill = SubResource("StyleBoxFlat_d0kov")
+value = 100.0
+show_percentage = false
